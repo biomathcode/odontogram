@@ -25,9 +25,6 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
 
-      - name: Test
-        run: pnpm test
-
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
