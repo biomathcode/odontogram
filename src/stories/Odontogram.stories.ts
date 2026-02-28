@@ -4,8 +4,8 @@ import '../og-odontogram'; // Import your component file
 import '../og-tooth';      // Import the sub-component
 
 const meta: Meta = {
-  title: 'Dental/OgDontogram',
-  component: 'og-dontogram',
+  title: 'OgOdontogram',
+  component: 'og-odontogram',
   argTypes: {
     notation: {
       control: { type: 'select' },
@@ -32,7 +32,7 @@ export const Default: Story = {
   },
   render: (args) => html`
     <div style="padding: 2rem; background: #f4f7f6; min-height: 100vh;">
-     <og-dontogram id="myChart"></og-dontogram>
+     <og-odontogram id="myChart"></og-odontogram>
 
 <div style="margin-top: 20px;">
   <label>Exported JSON State:</label><br>
@@ -60,9 +60,9 @@ export const WithPreexistingConditions: Story = {
     chartData: mockData,
   },
   render: (args) => html`
-    <og-dontogram 
+    <og-odontogram 
       .notation=${args.notation} 
       .chartData=${args.chartData}>
-    </og-dontogram>
+    </og-odontogram>
   `,
 };

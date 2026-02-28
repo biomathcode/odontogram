@@ -5,14 +5,18 @@
 [![npm downloads](https://img.shields.io/npm/dm/odontogram?color=green\&label=downloads)](https://www.npmjs.com/package/odontogram)
 [![Storybook](https://img.shields.io/badge/Storybook-Demo-orange)](https://biomathcode.github.io/odontogram)
 
-A lightweight, interactive, and highly customizable **Web Component Ogdontogram** built with [Lit](https://lit.dev/). Perfect for dental software, patient records, and educational tools.
+A lightweight, interactive, and highly customizable **Web Component og-odontogram** built with [Lit](https://lit.dev/). Perfect for dental software, patient records, and educational tools.
 
 ## ✨ Features
 
 * **Zero Framework Dependency**: Works with React, Vue, Angular, or plain HTML.
 * **Multi-Mode Support**: Toggle between `adult` (32 teeth), `baby` (20 primary teeth), and `old` (geriatric) layouts.
+* **Multiple Notations**: Display tooth labels in `fdi`, `universal`, or `palmer` notation.
 * **Interactive Regions**: Supports 5 surfaces per tooth: Vestibular, Distal, Palatine, Mesial, and Occlusal.
+* **Accessible by Keyboard**: Every tooth surface is focusable and can be toggled with `Enter` / `Space`.
+* **Screen-Reader Friendly**: Surfaces expose `aria-pressed`, descriptive labels, and live updates.
 * **JSON Powered**: Export and rehydrate the entire chart state via a simple JSON object.
+* **PNG Export**: Download the current chart view as a PNG with built-in canvas export (no extra dependency).
 * **CSS Theming**: Customize selection colors using CSS variables.
 * **Open-WC Compliant**: Shipped as unoptimized ESM for maximum bundler compatibility.
 
@@ -38,15 +42,22 @@ npm install odontogram
   import 'odontogram';
 </script>
 
-<og-odontogram id="my-chart" mode="adult"></og-odontogram>
+<og-odontogram id="my-chart" mode="adult" notation="fdi"></og-odontogram>
 
 <script>
   const chart = document.getElementById('my-chart');
 
   // Listen for changes
-  chart.addEventListener('oodontogram-change', (e) => {
-    console.log('New State:', e.detail.data);
+  chart.addEventListener('odontogram-change', (e) => {
+    // FDI-keyed state
+    console.log('FDI state:', e.detail.data);
+
+    // Current-notation state (e.g. universal/palmer labels)
+    console.log('Notation state:', e.detail.notationData);
   });
+
+  // Download as PNG
+  chart.downloadPng('patient-chart.png');
 </script>
 
 ```
@@ -54,13 +65,14 @@ npm install odontogram
 ### React / Next.js
 
 ```jsx
-import 'oodontogram';
+import 'odontogram';
 
 function App() {
   return (
     <og-odontogram 
       mode="baby" 
-      onoodontogram-change={(e) => console.log(e.detail.data)}
+      notation="universal"
+      onodontogram-change={(e) => console.log(e.detail.data)}
     />
   );
 }
@@ -73,16 +85,25 @@ function App() {
 
 ### Properties
 
-| Property    | Type     | Default   | Description                              |
-| ----------- | -------- | --------- | ---------------------------------------- |
-| `mode`      | `string` | `'adult'` | Patient type: `adult`, `baby`, or `old`. |
-| `chartData` | `object` | `{}`      | Initial state to pre-fill the chart.     |
+| Property    | Type     | Default   | Description                                     |
+| ----------- | -------- | --------- | ----------------------------------------------- |
+| `mode`      | `string` | `'adult'` | Patient type: `adult`, `baby`, or `old`.        |
+| `notation`  | `string` | `'fdi'`   | Label system: `fdi`, `universal`, or `palmer`.  |
+| `chartData` | `object` | `{}`      | Initial state (internally keyed in FDI format). |
 
 ### Custom Events
 
-| Event                | Detail                      | Description                                |
-| -------------------- | --------------------------- | ------------------------------------------ |
-| `oodontogram-change` | `{ data: {}, mode: string}` | Fired whenever a tooth surface is toggled. |
+| Event               | Detail                                   | Description                                |
+| ------------------- | ---------------------------------------- | ------------------------------------------ |
+| `odontogram-change` | `{ data, notationData, mode, notation }` | Fired whenever a tooth surface is toggled. |
+
+### Public Methods
+
+| Method         | Signature                                                       | Description                                         |
+| -------------- | --------------------------------------------------------------- | --------------------------------------------------- |
+| `getChartData` | `(notation = currentNotation) => Record<string, ToothSurfaces>` | Returns chart data keyed by the requested notation. |
+| `toPngDataUrl` | `() => string`                                                  | Returns a PNG data URL for the current chart.       |
+| `downloadPng`  | `(filename?: string) => void`                                   | Downloads a PNG file of the current chart.          |
 
 ### CSS Variables
 
@@ -94,6 +115,12 @@ og-odontogram {
 }
 
 ```
+
+### Accessibility
+
+* Tab to each tooth surface, then use `Enter` or `Space` to toggle.
+* Surfaces expose `aria-pressed` and descriptive labels.
+* Live announcements communicate selection changes for assistive technology.
 
 ---
 

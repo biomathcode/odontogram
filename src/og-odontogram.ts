@@ -5,8 +5,8 @@ import './og-tooth';
 
 export type PatientMode = 'adult' | 'baby' | 'old';
 
-@customElement('og-dontogram')
-export class OgDontogram extends LitElement {
+@customElement('og-odontogram')
+export class OgOdontogram extends LitElement {
     @property({ type: String }) mode: PatientMode = 'adult';
     @property({ type: Object }) chartData: Record<string, ToothSurfaces> = {};
     @state() private teethState: Record<string, ToothSurfaces> = {};

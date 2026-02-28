@@ -12,7 +12,7 @@ export default defineConfig({
   // --- BUILD CONFIG (FOR NPM) ---
   build: {
     lib: {
-      // Points to your main entry that exports og-tooth and og-dontogram
+      // Points to your main entry that exports og-tooth and og-odontogram
       entry: path.resolve(dirname, 'src/index.ts'),
       name: 'OgOdontogram',
       fileName: (format) => `og-odontogram.${format}.js`,

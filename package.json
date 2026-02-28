@@ -48,7 +48,7 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "pnpm run storybook",
     "build": "tsdown --format esm --format cjs",
     "build:check": "tsdown --publint",
     "build:vite": "tsc && vite build",
