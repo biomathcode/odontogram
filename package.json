@@ -1,6 +1,6 @@
 {
   "name": "odontogram",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A lightweight, interactive web component odontogram built with Lit.",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -33,17 +33,31 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/biomathcode/odontogram"
+    "url": "https://github.com/biomathcode/odontogram.git"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore(release): v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    }
   },
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsdown",
+    "build": "tsdown --format esm --format cjs",
+    "build:check": "tsdown --publint",
     "build:vite": "tsc && vite build",
+    "release": "pnpm build && pnpm release-it",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "deploy-storybook": "gh-pages -d storybook-static",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "lit": "^3.3.1"
@@ -58,6 +72,8 @@
     "@vitest/coverage-v8": "^4.0.18",
     "gh-pages": "^6.3.0",
     "playwright": "^1.58.2",
+    "publint": "^0.3.17",
+    "release-it": "^19.2.4",
     "storybook": "^10.2.13",
     "tsdown": "0.21.0-beta.2",
     "typescript": "~5.9.3",

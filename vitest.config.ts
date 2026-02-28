@@ -40,7 +40,7 @@ export default defineConfig({
 
   // --- TEST CONFIG (FOR VITEST/STORYBOOK) ---
   test: {
-    workspace: [
+    projects: [
       {
         extends: true,
         plugins: [

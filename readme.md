@@ -1,5 +1,10 @@
 # 🦷 Og-odontogram
 
+
+[![npm version](https://img.shields.io/npm/v/odontogram?color=blue\&label=npm)](https://www.npmjs.com/package/odontogram)
+[![npm downloads](https://img.shields.io/npm/dm/odontogram?color=green\&label=downloads)](https://www.npmjs.com/package/odontogram)
+[![Storybook](https://img.shields.io/badge/Storybook-Demo-orange)](https://biomathcode.github.io/odontogram)
+
 A lightweight, interactive, and highly customizable **Web Component Ogdontogram** built with [Lit](https://lit.dev/). Perfect for dental software, patient records, and educational tools.
 
 ## ✨ Features
